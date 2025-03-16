@@ -69,7 +69,8 @@ def wrap_mon(amount):
         tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         print(Fore.GREEN + "✅ Successfully wrapped MON to WMON")
         print(Fore.LIGHTBLACK_EX + f"➡️  Hash: {tx_hash.hex()}")
-        w3.eth.waitForTransactionReceipt(tx_hash)
+        # Mengganti waitForTransactionReceipt dengan wait_for_transaction_receipt
+        w3.eth.wait_for_transaction_receipt(tx_hash)
     except Exception as e:
         print(Fore.RED + f"❌ Error while wrapping MON to WMON: {str(e)}")
 
@@ -87,7 +88,8 @@ def unwrap_mon(amount):
         tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
         print(Fore.GREEN + "✅ Successfully unwrapped WMON to MON")
         print(Fore.LIGHTBLACK_EX + f"➡️  Hash: {tx_hash.hex()}")
-        w3.eth.waitForTransactionReceipt(tx_hash)
+        # Mengganti waitForTransactionReceipt dengan wait_for_transaction_receipt
+        w3.eth.wait_for_transaction_receipt(tx_hash)
     except Exception as e:
         print(Fore.RED + f"❌ Error while unwrapping WMON to MON: {str(e)}")
 
@@ -111,4 +113,3 @@ if __name__ == '__main__':
         run_swap_cycle(1)
     except Exception as e:
         print(Fore.RED + f"❌ Error in runSwapCycle: {str(e)}")
-
