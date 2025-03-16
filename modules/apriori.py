@@ -11,8 +11,8 @@ load_dotenv()
 
 def display_header():
     print(Style.BRIGHT + Fore.CYAN + "======================================")
-    print(Style.BRIGHT + Fore.CYAN + "            Apriori Module          ")
-    print(Style.BRIGHT + Fore.CYAN + "======================================\n")
+    print(Style.BRIGHT + Fore.CYAN + "            Apriori Bot               ")
+    print(Style.BRIGHT + Fore.CYAN + "====================================\n")
 
 # Konfigurasi
 RPC_URL = "https://testnet-rpc.monad.xyz"
