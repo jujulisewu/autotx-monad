@@ -11,7 +11,7 @@ init(autoreset=True)
 
 def displayHeader():
     print(Fore.BLUE + "====================")
-    print(Fore.BLUE + "      RUBIC")
+    print(Fore.BLUE + "      RUBIC Bot     ")
     print(Fore.BLUE + "====================")
 
 load_dotenv()
