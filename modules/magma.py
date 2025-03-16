@@ -12,7 +12,7 @@ load_dotenv()
 
 def displayHeader():
     print(Fore.BLUE + "====================")
-    print(Fore.BLUE + "     MAGMA")
+    print(Fore.BLUE + "     MAGMA Bot      ")
     print(Fore.BLUE + "====================")
 
 displayHeader()
