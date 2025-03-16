@@ -10,7 +10,6 @@ YOUTUBE CHANNEL : [SHARE IT HUB](https://www.youtube.com/@SHAREITHUB_COM)
 
 1. Before running this boat. You are required to connect your wallet that will be botted to the website below :
 
-`
 https://stake.apr.io/
 
 https://swap.bean.exchange/
@@ -26,5 +25,4 @@ https://www.magmastaking.xyz/
 https://monorail.xyz/
 
 https://testnet.rubic.exchange/
-`
 
