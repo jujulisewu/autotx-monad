@@ -8,6 +8,8 @@ from asyncio.subprocess import PIPE
 from subprocess import CalledProcessError
 from colorama import init, Fore, Style
 from dotenv import load_dotenv
+import pyfiglet  # Untuk tampilan ASCII art
+from halo import Halo  # Untuk animasi loading
 
 init(autoreset=True)
 load_dotenv()
@@ -15,6 +17,15 @@ load_dotenv()
 PRIVATE_KEY = os.getenv("PRIVATE_KEY")
 
 def display_header():
+    # Membuat banner ASCII art dengan pyfiglet
+    ascii_banner = pyfiglet.figlet_format("AUTO TX MONAD")
+    border = "=" * 80
+    print(Style.BRIGHT + Fore.CYAN + border)
+    print(Style.BRIGHT + Fore.YELLOW + ascii_banner)
+    sub_header = "By SHARE IT HUB".center(80)
+    print(Style.BRIGHT + Fore.MAGENTA + sub_header)
+    print(Style.BRIGHT + Fore.CYAN + border + "\n")
+    # Mempertahankan header lama agar tidak menghapus apapun
     print(Style.BRIGHT + Fore.CYAN + "======================================")
     print(Style.BRIGHT + Fore.CYAN + " AUTO TX MONAD BY SHARE IT HUB        ")
     print(Style.BRIGHT + Fore.CYAN + "====================================\n")
@@ -27,7 +38,7 @@ def check_env_vars():
     if missing_vars:
         print(Fore.RED + f"❌ Missing environment variables: {', '.join(missing_vars)}")
         for var in missing_vars:
-            value = input(f"Masukkan nilai untuk {var}: ").strip()
+            value = input(Fore.CYAN + f"Masukkan nilai untuk {var}: ").strip()
             if value:
                 os.environ[var] = value
             else:
@@ -53,12 +64,15 @@ async def run_script(script):
     print(Fore.YELLOW + f"\n📜 Menjalankan: {script['name']}...")
     cmd = [sys.executable, script["path"]]
 
+    spinner = Halo(text='Sedang mengeksekusi...', spinner='dots', color='cyan')
+    spinner.start()
     proc = await asyncio.create_subprocess_exec(
         *cmd,
         stdout=PIPE,
         stderr=PIPE
     )
     stdout, stderr = await proc.communicate()
+    spinner.stop()
 
     if stdout:
         print(Fore.WHITE + stdout.decode())
@@ -73,7 +87,7 @@ async def run_script(script):
 
 async def run_scripts_sequentially(loop_count, selected_scripts):
     for i in range(loop_count):
-        print(Fore.BLUE + f"\n🔄 Loop {i + 1} dari {loop_count}...\n")
+        print(Fore.BLUE + f"\n🔄 Loop {i + 1} dari {loop_count}...\n" + "-" * 80)
         for script in selected_scripts:
             try:
                 await run_script(script)
@@ -84,11 +98,13 @@ async def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     display_header()
     print(Fore.BLUE + Style.BRIGHT + "\n🚀 Jalankan Modul Auto\n")
+    print(Fore.CYAN + "-" * 80)
     print("Pilih modul yang ingin dijalankan (pisahkan dengan koma, misal: 1,2,3).")
     print("Jika dikosongkan, maka semua modul akan dijalankan.\n")
     for idx, script in enumerate(scripts, start=1):
-        print(f"{idx}. {script['name']}")
-    selection = input("\nMasukkan nomor modul (default semua): ").strip()
+        print(f"{Fore.YELLOW}{idx}. {Fore.WHITE}{script['name']}")
+    print(Fore.CYAN + "-" * 80)
+    selection = input(Fore.CYAN + "\nMasukkan nomor modul (default semua): ").strip()
 
     if selection == "":
         selected_modules = scripts
@@ -101,19 +117,23 @@ async def main():
         except Exception as e:
             selected_modules = scripts
 
-    loop_count_str = input("\nBerapa kali ingin menjalankan modul? (default 1): ").strip()
+    loop_count_str = input(Fore.CYAN + "\nBerapa kali ingin menjalankan modul? (default 1): ").strip()
     try:
         loop_count = int(loop_count_str) if loop_count_str != "" else 1
         if loop_count <= 0:
-            print("Masukkan angka lebih dari 0. Menggunakan default 1.")
+            print(Fore.RED + "Masukkan angka lebih dari 0. Menggunakan default 1.")
             loop_count = 1
     except:
         loop_count = 1
 
     print(Fore.GREEN + f"\n🚀 Memulai eksekusi {len(selected_modules)} modul selama {loop_count} loop\n")
-
     await run_scripts_sequentially(loop_count, selected_modules)
     print(Fore.GREEN + Style.BRIGHT + "\n✅✅ Semua modul selesai dijalankan! ✅✅\n")
+    # Ucapan terima kasih dengan border yang lebih stylish
+    thank_you_border = "*" * 80
+    print(Fore.MAGENTA + thank_you_border)
+    print(Fore.MAGENTA + "Terima kasih telah menggunakan script ini!".center(80))
+    print(Fore.MAGENTA + thank_you_border + "\n")
 
 if __name__ == '__main__':
     try:
