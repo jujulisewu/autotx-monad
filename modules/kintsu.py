@@ -10,7 +10,6 @@ init(autoreset=True)
 
 
 def display_header():
-    # Simulasi header (mirip dengan penggunaan cfonts dan banner.js)
     print(Fore.BLUE + "====================")
     print(Fore.BLUE + "      KINTSU Bot     ")
     print(Fore.BLUE + "====================")
@@ -19,7 +18,6 @@ def display_header():
 load_dotenv()
 display_header()
 
-# Konfigurasi RPC dan akun
 RPC_URL = "https://testnet-rpc.monad.xyz/"
 EXPLORER_URL = "https://testnet.monadexplorer.com/tx/"
 w3 = Web3(Web3.HTTPProvider(RPC_URL))
@@ -29,13 +27,12 @@ if not PRIVATE_KEY:
     sys.exit(1)
 account = w3.eth.account.from_key(PRIVATE_KEY)
 
-# Konfigurasi Kontrak dan Gas
 contract_address = Web3.to_checksum_address("0x2c9C959516e9AAEdB2C748224a41249202ca8BE7")
 gas_limit_stake = 500000
 gas_limit_unstake = 800000
 
 STAKE_AMOUNT = w3.to_wei(0.1, 'ether')
-UNSTAKE_DELAY = 5 * 60  # 5 menit (dalam detik)
+UNSTAKE_DELAY = 5 * 60  
 
 
 def get_gas_price():
