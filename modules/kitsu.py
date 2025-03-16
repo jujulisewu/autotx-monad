@@ -12,7 +12,7 @@ init(autoreset=True)
 def display_header():
     # Simulasi header (mirip dengan penggunaan cfonts dan banner.js)
     print(Fore.BLUE + "====================")
-    print(Fore.BLUE + "      KITSU")
+    print(Fore.BLUE + "      KITSU Bot     ")
     print(Fore.BLUE + "====================")
 
 
