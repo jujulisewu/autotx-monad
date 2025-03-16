@@ -11,7 +11,7 @@ init(autoreset=True)
 
 def displayHeader():
     print(Fore.BLUE + "====================")
-    print(Fore.BLUE + "    AUTOSEND")
+    print(Fore.BLUE + "    AUTOSEND Bot    ")
     print(Fore.BLUE + "====================")
 
 load_dotenv()
