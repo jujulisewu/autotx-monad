@@ -10,7 +10,7 @@ init(autoreset=True)
 
 def displayHeader():
     print(Fore.BLUE + "====================")
-    print(Fore.BLUE + "   MONORAIL")
+    print(Fore.BLUE + "   MONORAIL Bot     ")
     print(Fore.BLUE + "====================")
 
 load_dotenv()
