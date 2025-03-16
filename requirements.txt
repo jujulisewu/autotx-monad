@@ -1,0 +1,5 @@
+shareithub
+requests
+colorama
+python-dotenv
+web3
