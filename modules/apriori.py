@@ -68,7 +68,8 @@ def send_transaction(tx):
     if 'gasPrice' not in tx:
         tx['gasPrice'] = w3.eth.gas_price
     signed_tx = account.sign_transaction(tx)
-    return w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+    # Perbaiki atribut rawTransaction menjadi raw_transaction
+    return w3.eth.send_raw_transaction(signed_tx.raw_transaction)
 
 
 def wait_for_receipt(tx_hash):
