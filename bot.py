@@ -93,7 +93,7 @@ async def main():
     display_header()
     print(Fore.BLUE + Style.BRIGHT + "\n?? Kabeh Ngko Auto\n")
     print(Fore.CYAN + "-" * 80)
-    print("Gari keting angka bae lah sing ndi (pisahkan dengan koma, misal: 1,2,3).")
+    print("Gari ketik angka bae lah sing ndi (pisahkan dengan koma, misal: 1,2,3).")
     print("Langsung enter bae ya kena ben jalan kabeh.\n")
     for idx, script in enumerate(scripts, start=1):
         print(f"{Fore.YELLOW}{idx}. {Fore.WHITE}{script['name']}")
