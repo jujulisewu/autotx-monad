@@ -74,7 +74,7 @@ async def run_script(script):
         print(Fore.RED + "Error: " + stderr.decode())
 
     if proc.returncode == 0:
-        print(Fore.GREEN + f"? Berhasil: {script['name']}")
+        print(Fore.GREEN + f"? A-EN-JE-A-Y Sopingun Engga Garap: {script['name']}")
     else:
         print(Fore.RED + f"? Gagal: {script['name']} (Kode keluar: {proc.returncode})")
         raise CalledProcessError(proc.returncode, cmd)
