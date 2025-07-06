@@ -55,7 +55,7 @@ for filename in module_files:
     scripts.append({ "name": name, "path": path })
 
 async def run_script(script):
-    print(Fore.YELLOW + f"\n?? Menjalankan: {script['name']}...")
+    print(Fore.YELLOW + f"\n?? Leksono OTW X-Wiro: {script['name']}...")
     cmd = [sys.executable, script["path"]]
 
     spinner = Halo(text='Sedang mengeksekusi...', spinner='dots', color='cyan')
@@ -111,7 +111,7 @@ async def main():
         except Exception as e:
             selected_modules = scripts
 
-    loop_count_str = input(Fore.CYAN + "\nBerapa kali ingin menjalankan modul? (default 1): ").strip()
+    loop_count_str = input(Fore.CYAN + "\nBerapa anu meh ping pira ya lur? enter bae pa lur? (default 1): ").strip()
     try:
         loop_count = int(loop_count_str) if loop_count_str != "" else 1
         if loop_count <= 0:
