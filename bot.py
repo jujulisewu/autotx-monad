@@ -23,7 +23,7 @@ def display_header():
     print(Style.BRIGHT + Fore.MAGENTA + sub_header)
     print(Style.BRIGHT + Fore.CYAN + border + "\n")
     print(Style.BRIGHT + Fore.CYAN + "======================================")
-    print(Style.BRIGHT + Fore.CYAN + " AUTO TX MONAD - SAFE VERSION        ")
+    print(Style.BRIGHT + Fore.CYAN + " X-WIRO x LEKSONO MONAD TESTNET        ")
     print(Style.BRIGHT + Fore.CYAN + "====================================\n")
 
 def check_env_vars():
@@ -91,10 +91,10 @@ async def run_scripts_sequentially(loop_count, selected_scripts):
 async def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     display_header()
-    print(Fore.BLUE + Style.BRIGHT + "\n?? Jalankan Modul Auto\n")
+    print(Fore.BLUE + Style.BRIGHT + "\n?? Kabeh Ngko Auto\n")
     print(Fore.CYAN + "-" * 80)
-    print("Pilih modul yang ingin dijalankan (pisahkan dengan koma, misal: 1,2,3).")
-    print("Jika dikosongkan, maka semua modul akan dijalankan.\n")
+    print("Gari keting angka bae lah sing ndi (pisahkan dengan koma, misal: 1,2,3).")
+    print("Langsung enter bae ya kena ben jalan kabeh.\n")
     for idx, script in enumerate(scripts, start=1):
         print(f"{Fore.YELLOW}{idx}. {Fore.WHITE}{script['name']}")
     print(Fore.CYAN + "-" * 80)
@@ -122,10 +122,10 @@ async def main():
 
     print(Fore.GREEN + f"\n?? Memulai eksekusi {len(selected_modules)} modul selama {loop_count} loop\n")
     await run_scripts_sequentially(loop_count, selected_modules)
-    print(Fore.GREEN + Style.BRIGHT + "\n?? Semua modul selesai dijalankan! ??\n")
+    print(Fore.GREEN + Style.BRIGHT + "\n?? Wis Kabeh Bro! Gari dibaleni ngesuk isuk ??\n")
     thank_you_border = "*" * 80
     print(Fore.MAGENTA + thank_you_border)
-    print(Fore.MAGENTA + "Terima kasih telah menggunakan script ini!".center(80))
+    print(Fore.MAGENTA + "Aja Putus Semangat!".center(80))
     print(Fore.MAGENTA + thank_you_border + "\n")
 
 if __name__ == '__main__':
