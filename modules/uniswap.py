@@ -89,17 +89,17 @@ def connect_to_rpc():
             provider = Web3(Web3.HTTPProvider(url))
             # Cek koneksi sederhana dengan mengambil network ID
             _ = provider.net.version
-            print(Fore.BLUE + "🪫  Starting Uniswap ⏩⏩⏩⏩")
+            print(Fore.BLUE + "??  Starting Uniswap ????")
             return provider
         except Exception as e:
             print(Fore.RED + f"Failed to connect to {url}, trying another...")
-    raise Exception("❌ Unable to connect to any RPC")
+    raise Exception("? Unable to connect to any RPC")
 
 w3 = connect_to_rpc()
 
 # Buat objek wallet dari PRIVATE_KEY
 wallet = w3.eth.account.from_key(PRIVATE_KEY)
-print(Fore.GREEN + f"🧧 Account: {wallet.address}")
+print(Fore.GREEN + f"?? Account: {wallet.address}")
 
 def get_random_eth_amount():
     # Menghasilkan nilai acak antara 0.0001 dan 0.01 ether
@@ -109,16 +109,16 @@ def get_random_eth_amount():
 
 def get_balance():
     balance = w3.eth.get_balance(wallet.address)
-    print(Fore.GREEN + f"🧧 MON: {w3.from_wei(balance, 'ether')} MON")
+    print(Fore.GREEN + f"?? MON: {w3.from_wei(balance, 'ether')} MON")
     # Dapatkan saldo WETH dari kontrak ERC20
     weth_contract = w3.eth.contract(address=WETH_ADDRESS, abi=erc20Abi)
     weth_balance = weth_contract.functions.balanceOf(wallet.address).call()
-    print(Fore.GREEN + f"🧧 WETH: {w3.from_wei(weth_balance, 'ether')} WETH\n")
+    print(Fore.GREEN + f"?? WETH: {w3.from_wei(weth_balance, 'ether')} WETH\n")
 
 def swap_eth_for_tokens(tokenAddress, tokenSymbol, amountInWei):
     router = w3.eth.contract(address=UNISWAP_V2_ROUTER_ADDRESS, abi=routerAbi)
     try:
-        print(Fore.GREEN + f"🔄 Swap {w3.from_wei(amountInWei, 'ether')} MON > {tokenSymbol}")
+        print(Fore.GREEN + f"?? Swap {w3.from_wei(amountInWei, 'ether')} MON > {tokenSymbol}")
         nonce = w3.eth.get_transaction_count(wallet.address, "pending")
         deadline = int(time.time()) + 600  # 10 menit
         tx = router.functions.swapExactETHForTokens(
@@ -135,19 +135,19 @@ def swap_eth_for_tokens(tokenAddress, tokenSymbol, amountInWei):
         })
         signed_tx = wallet.sign_transaction(tx)
         tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-        print(Fore.YELLOW + f"➡️  Hash: {tx_hash.hex()}")
+        print(Fore.YELLOW + f"??  Hash: {tx_hash.hex()}")
     except Exception as e:
-        print(Fore.RED + f"❌ Failed swap: {str(e)}")
+        print(Fore.RED + f"? Failed swap: {str(e)}")
 
 def swap_tokens_for_eth(tokenAddress, tokenSymbol):
     token_contract = w3.eth.contract(address=tokenAddress, abi=erc20Abi)
     balance = token_contract.functions.balanceOf(wallet.address).call()
     if balance == 0:
-        print(Fore.BLACK + f"❌ No balance {tokenSymbol}, skip")
+        print(Fore.BLACK + f"? No balance {tokenSymbol}, skip")
         return
     router = w3.eth.contract(address=UNISWAP_V2_ROUTER_ADDRESS, abi=routerAbi)
     try:
-        print(Fore.GREEN + f"🔄 Swap {tokenSymbol} > MON")
+        print(Fore.GREEN + f"?? Swap {tokenSymbol} > MON")
         # Approve router untuk menghabiskan token
         approve_tx = token_contract.functions.approve(UNISWAP_V2_ROUTER_ADDRESS, balance).build_transaction({
             'from': wallet.address,
@@ -172,12 +172,12 @@ def swap_tokens_for_eth(tokenAddress, tokenSymbol):
         })
         signed_tx = wallet.sign_transaction(tx)
         tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-        print(Fore.YELLOW + f"➡️  Hash: {tx_hash.hex()}")
+        print(Fore.YELLOW + f"??  Hash: {tx_hash.hex()}")
         delay = random.randint(1000, 3000)
-        print(Fore.LIGHTBLACK_EX + f"⏳ Wait {delay/1000} seconds")
+        print(Fore.LIGHTBLACK_EX + f"? Wait {delay/1000} seconds")
         time.sleep(delay / 1000)
     except Exception as e:
-        print(Fore.RED + f"❌ Failed: {str(e)}")
+        print(Fore.RED + f"? Failed: {str(e)}")
 
 def main():
     get_balance()
@@ -186,9 +186,9 @@ def main():
         ethAmount = get_random_eth_amount()
         swap_eth_for_tokens(tokenAddress, tokenSymbol, ethAmount)
         delay = random.randint(1000, 3000)
-        print(Fore.LIGHTBLACK_EX + f"⏳ Wait {delay/1000} seconds")
+        print(Fore.LIGHTBLACK_EX + f"? Wait {delay/1000} seconds")
         time.sleep(delay / 1000)
-    print("\n" + Fore.WHITE + "🧿 All Token Reverse to MONAD\n")
+    print("\n" + Fore.WHITE + "?? All Token Reverse to MONAD\n")
     # Swap tokens back to ETH
     for tokenSymbol, tokenAddress in TOKEN_ADDRESSES.items():
         swap_tokens_for_eth(tokenAddress, tokenSymbol)
@@ -197,4 +197,4 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as err:
-        print(Fore.RED + f"❌ Error: {err}")
+        print(Fore.RED + f"? Error: {err}")
